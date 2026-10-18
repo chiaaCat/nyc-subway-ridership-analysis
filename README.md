@@ -42,3 +42,12 @@ This analysis currently uses ridership data from *October 28th, 2025*.
 
 #### Testing
 * Uses pytest to test data preprocessing: *valid ridership, proper numeric and timestamp conversion, correct number of records*
+
+---
+### Future Development
+* Expand dataset to include multiple days/weeks of ridership records
+* Develop a neural network regression model to predict hourly station ridership using historical ridership patterns
+* Evaluate regression model performance using MAE and RMSE
+* Reevalute station clusters with expanded dataset
+* Expand pytest coverage
+* Add setup instructions for running the project locally

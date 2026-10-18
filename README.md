@@ -18,3 +18,27 @@ This analysis currently uses ridership data from *October 28th, 2025*.
 
 ---
 ### Current Features
+
+#### Data Collection and Preprocessing
+* Uses pagination to retrieve hourly subway ridership data
+* Cleans invalid records, converts numeric fields, and standardizes timestamps
+* Saves cleaned date to local CSV file
+
+#### Data Storage
+* Stores cleaned data in MongoDB Atlas using PyMongo
+* Uses batch upserts and unique indices to prevent duplicate records
+* Aggregates data directly in MongoDB
+
+#### Ridership Analysis
+* Calculates total recorded ridership for each station
+* Identifies and ranks top ten stations with highest ridership
+
+#### K-Means Clustering
+* Creates 24-hour ridership profiles for 424 stations
+* Normalizes hourly ridership by each station's total daily ridership
+* Evaluates cluster counts using silhouette scores and inertia
+* Applies K-Means clustering to identify differences in station activity patterns
+* Visualizes average hourly ridership proportions for each cluster
+
+#### Testing
+* Uses pytest to test data preprocessing: *valid ridership, proper numeric and timestamp conversion, correct number of records*

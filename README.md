@@ -41,8 +41,10 @@ This analysis currently uses ridership data from *October 28th, 2025*.
 * Visualizes average hourly ridership proportions for each cluster
 
 #### Testing
-* Uses pytest to test data preprocessing: *valid ridership, proper numeric and timestamp conversion, correct number of records*
-
+* Uses pytest to test:
+  * Data preprocessing: *negative ridership, proper numeric and timestamp conversion, correct number of records, invalid timestamps*
+  * Station feature creation: *hourly ridership values, handling of missing hours*
+  * Ridership normalization: *correct hourly proportions, exclusion of stations with zero ridership*
 ---
 ### Future Development
 * Expand dataset to include multiple days/weeks of ridership records

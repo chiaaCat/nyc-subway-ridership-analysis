@@ -27,3 +27,39 @@ def test_clean_ridership_data():
     assert pd.api.types.is_numeric_dtype(
         cleaned["latitude"]
     )
+
+def test_missing_data():
+    raw_data = pd.DataFrame({
+        "transit_timestamp": [
+            "2025-05-23T08:00:00",
+            "2025-05-23T09:00:00"
+        ],
+        "station_complex_id": ["100", None],
+        "ridership": ["50.0", "100.0"],
+        "transfers": ["0.0", "0.0"],
+        "latitude": ["40.70687", "40.70700"],
+        "longitude": ["-73.95343", "-73.95400"]
+    })
+
+    cleaned = clean_ridership_data(raw_data)
+
+    assert len(cleaned) == 1
+    assert cleaned.iloc[0]["station_complex_id"] == "100"
+
+def test_invalid_timestamps():
+    raw_data = pd.DataFrame({
+        "transit_timestamp": [
+            "2025-05-23T08:00:00",
+            "not_a_date"
+        ],
+        "station_complex_id": ["100", "101"],
+        "ridership": ["50.0", "100.0"],
+        "transfers": ["0.0", "0.0"],
+        "latitude": ["40.70687", "40.70700"],
+        "longitude": ["-73.95343", "-73.95400"]
+    })
+
+    cleaned = clean_ridership_data(raw_data)
+
+    assert len(cleaned) == 1
+    assert cleaned.iloc[0]["station_complex_id"] == "100"

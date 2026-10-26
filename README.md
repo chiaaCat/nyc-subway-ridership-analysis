@@ -20,7 +20,7 @@ This analysis currently uses ridership data from *October 28th, 2025*.
 ### Current Features
 
 #### Data Collection and Preprocessing
-* Uses pagination to retrieve hourly subway ridership data
+* Uses pagination and configurable date ranges to retrieve hourly subway ridership data
 * Cleans invalid records, converts numeric fields, and standardizes timestamps
 * Saves cleaned date to local CSV file
 
@@ -45,6 +45,7 @@ This analysis currently uses ridership data from *October 28th, 2025*.
   * Data preprocessing: *negative ridership, proper numeric and timestamp conversion, correct number of records, invalid timestamps*
   * Station feature creation: *hourly ridership values, handling of missing hours*
   * Ridership normalization: *correct hourly proportions, exclusion of stations with zero ridership*
+  * Data collection: *correct date filtering and API request parameters*
 ---
 ### Future Development
 * Expand dataset to include multiple days/weeks of ridership records

@@ -5,7 +5,7 @@ from src.preprocessing import clean_ridership_data
 URL = "https://data.ny.gov/resource/5wq4-mkjj.json"
 
 # Fetch raw MTA ridership records
-def fetch_ridership_data():
+def fetch_ridership_data(start_date, end_date):
 
     all_records = []
     batch_size = 5000
@@ -15,8 +15,8 @@ def fetch_ridership_data():
         while True:
             params = {
                 "$where": (
-                    "transit_timestamp >= '2025-10-28T00:00:00' "
-                    "AND transit_timestamp < '2025-10-29T00:00:00' "
+                    f"transit_timestamp >= '{start_date}T00:00:00' "
+                    f"AND transit_timestamp < '{end_date}T00:00:00' "
                     "AND transit_mode = 'subway'"
                 ),
                 "$order": ":id",
@@ -34,13 +34,6 @@ def fetch_ridership_data():
             batch = response.json()
             all_records.extend(batch)
 
-            """
-            print(
-                f"Fetched {len(batch)} - "
-                f"Total: {len(all_records)}"
-            )
-            """
-
             if len(batch) < batch_size:
                 break
 
@@ -50,11 +43,11 @@ def fetch_ridership_data():
 
 
 if __name__ == "__main__":
-    raw_data = fetch_ridership_data()
+    raw_data = fetch_ridership_data("2025-10-29", "2025-10-30")
     cleaned_data = clean_ridership_data(raw_data)
 
     print(f"Raw records: {len(raw_data):,}")
     print(f"Cleaned records: {len(cleaned_data):,}")
 
-    cleaned_data.to_csv("data/subway_test.csv", index=False)
-    print("Saved cleaned data to data/subway_test.csv")
+    cleaned_data.to_csv("data/subway_2025-10-29.csv", index=False)
+    print("Saved cleaned data to data/subway_2025-10-29.csv")
